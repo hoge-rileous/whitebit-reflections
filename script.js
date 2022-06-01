@@ -1,4 +1,20 @@
-  async getData () {
+  async getTransactions (fromBlock, toBlock) {
+    console.log("Getting TX, ", fromBlock, "--->", toBlock);
+    const url = 'https://api.etherscan.io/api?module=account&action=tokentx&startblock=' + fromBlock + "&endblock=" + toBlock + '&contractaddress=0xfad45e47083e4607302aa43c65fb3106f1cd7607&address=0x39f6a6c85d39d5abad8a398310c52e7c374f2ba3&apikey=WHIV2FAKITRJUY67GSV6SY8SYNTMJQ4VHH';
+    let res;
+    await fetch(url)
+    .then(async (response) => {
+        const data = await response.json();
+      if (data != '') {
+          res = data.result;
+      } else {
+          console.log("Error");
+      }
+    })
+    return res;
+  }  
+
+async getData () {
 
     var hogeBalance = ethers.BigNumber.from(0);
     var totalHogeTransferred = ethers.BigNumber.from(0);
