@@ -36,9 +36,9 @@ async getData () {
     for (let transaction of transactions) {
         var tempVal = ethers.BigNumber.from(transaction.value);
         if (transaction.to == "0x39f6a6c85d39d5abad8a398310c52e7c374f2ba3") {
-            totalHogeTransferred = totalHogeTransferred.add(tempVal.mul(98).div(100));
+            totalHogeTransferred = totalHogeTransferred.add(tempVal);
         } else if (transaction.from == "0x39f6a6c85d39d5abad8a398310c52e7c374f2ba3") {
-            totalHogeTransferred = totalHogeTransferred.sub(tempVal);
+            totalHogeTransferred = totalHogeTransferred.sub(tempVal.mul(100).div(98));
         } else {
             console.log("Don't know how to process:", transaction)
         }
